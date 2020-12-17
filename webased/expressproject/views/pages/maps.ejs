@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="">
+<%- include('../template/head')-%>
+<head>
+    <meta charset="UTF-8">
+    <title>Game Title Here</title>
+    <script src="/javascripts/phaser.min.js">
+    </script>
+    <script src="/javascripts/maps.js">
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAETYuBdbAByenC4jrpgGPiou-eRILNbiw&callback=initMap"type="text/javascript">
+    </script>
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0
+      }
+    </style>
+</head>
+
+ <body>
+  <div id="map"></div>
+</body>
+
+</html>

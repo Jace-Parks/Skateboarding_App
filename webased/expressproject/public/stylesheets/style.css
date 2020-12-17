@@ -1,0 +1,45 @@
+#navbox{
+  color:black;
+}
+
+.nav-link:visited{
+  color:black;
+  font-style:large;
+}
+
+.nav-link{
+  color:red;
+  font-style:large;
+}
+
+#navbarbox:visited{
+   background-color: red;
+}
+
+.numcir:before {
+  content: ' \25CF';
+  font-size: 200px;
+}
+
+.Button{
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: green;
+}
+
+div.ulambuttoncontainer{
+  position:fixed;
+  bottom:0;
+  right:0;
+}
+
+#updiv{
+  right:100px;
+}
