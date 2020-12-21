@@ -1,0 +1,22 @@
+{
+  "name": "skateboarding_app",
+  "version": "1.0.0",
+  "description": "A geo social media app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jace-Parks/Skateboarding_App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jace-Parks/Skateboarding_App/issues"
+  },
+  "homepage": "https://github.com/Jace-Parks/Skateboarding_App#readme",
+  "dependencies": {
+    "mongodb": "^3.6.3"
+  }
+}
