@@ -17,6 +17,9 @@ const url = "mongodb://mongoadmin0:Prestond234@73.37.45.136:27017/skatemaps";
 //const client = new MongoClient(url);
 
 
+
+//functions and actions
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
@@ -64,6 +67,24 @@ async function createListing(client, newListing){
 
   console.log(`New listing created with the following id: ${result.insertedId}`);
 
-}
+};
+
+//usage
+
+/*await createListing(client,
+
+  {
+
+      name: "Lovely Loft",
+
+      summary: "A charming loft in Paris",
+
+      bedrooms: 1,
+
+      bathrooms: 1
+
+  }
+
+);*/
 
 main().catch(console.error);
