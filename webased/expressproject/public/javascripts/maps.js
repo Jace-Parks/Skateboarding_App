@@ -1,4 +1,7 @@
 let map;
+var glat;
+var glng;
+
 
 function initMap() {
   const myLatLng = { lat: -25.363, lng: 131.044 };
@@ -19,9 +22,12 @@ function initMap() {
     title: "hello world",
   })*/
 
-  google.maps.event.addListener(map, 'click', function (event) {
-    displayCoordinates(event.latLng);               
+  google.maps.event.addListener(map, 'mousedown', function (event) {
+    var x = displayCoordinates(event.latLng);     
+    glat = x[0];
+    glng = x[1];     
   });
+
 
   // JAVASCRIPT (jQuery)
 
@@ -32,8 +38,8 @@ $(document).bind("contextmenu", function (event) {
     event.preventDefault();
     
     // Show contextmenu
-    $(".custom-menu").finish().toggle(100).
-    
+    $(".custom-menu").finish().toggle(100).              
+
     // In the right position (the mouse)
     css({
         top: event.pageY + "px",
@@ -61,9 +67,13 @@ $(".custom-menu li").click(function(){
     switch($(this).attr("data-action")) {
         
         // A case for each action. Your actions here
-        case "first": alert("first"); break;
-        case "second": alert("second"); break;
-        case "third": alert("third"); break;
+        case "addSpot": 
+           console.log("adding spot!"); 
+           console.log(glng);
+           console.log(glat);
+           document.getElementById('id01').style.display='block'
+           break;
+        
     }
   
     // Hide it AFTER the action was triggered
@@ -80,6 +90,14 @@ $(".custom-menu li").click(function(){
   });
 }*/
 
+function rightclick() {
+  var rightclick;
+  var e = window.event;
+  if (e.which) rightclick = (e.which == 3);
+  else if (e.button) rightclick = (e.button == 2);
+}
+
+
 
 function displayCoordinates(pnt) {
 
@@ -87,5 +105,25 @@ function displayCoordinates(pnt) {
   lat = lat.toFixed(4);
   var lng = pnt.lng();
   lng = lng.toFixed(4);
-  console.log("Latitude: " + lat + "  Longitude: " + lng);
+  //console.log("Latitude: " + lat + "  Longitude: " + lng);
+
+  return [lat, lng];
 }
+
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+var fixed = document.getElementById('id01');
+
+fixed.addEventListener('touchmove', function(e) {
+
+        e.preventDefault();
+
+}, false);
