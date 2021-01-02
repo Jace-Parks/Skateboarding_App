@@ -1,6 +1,10 @@
 let map;
 var glat;
 var glng;
+var user;
+var pswd;
+//const bcrypt = require("bcrypt");
+
 
 
 function initMap() {
@@ -127,3 +131,33 @@ fixed.addEventListener('touchmove', function(e) {
         e.preventDefault();
 
 }, false);
+
+//password and username listener
+function getuser(){
+  console.log("called");
+  user = document.getElementById("uname").value;
+  pswd = document.getElementById("psw").value;
+  
+  
+}
+
+
+exports.cryptPassword = function(password, callback) {
+  bcrypt.genSalt(10, function(err, salt) {
+   if (err) 
+     return callback(err);
+
+   bcrypt.hash(password, salt, function(err, hash) {
+     return callback(err, hash);
+   });
+ });
+};
+
+exports.comparePassword = function(plainPass, hashword, callback) {
+  bcrypt.compare(plainPass, hashword, function(err, isPasswordMatch) {   
+      return err == null ?
+          callback(null, isPasswordMatch) :
+          callback(err);
+  });
+};
+

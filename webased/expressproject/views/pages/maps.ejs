@@ -32,9 +32,9 @@
   <ul class='custom-menu'>
     <li data-action="addSpot">Add Spot</li>
   </ul>
-  <div id="id01" class="modal">
 
-    <form class="modal-content animate" action="/action_page.php" method="post">
+  <div id="id01" class="modal">
+    <form class="modal-content animate">
       <div class="imgcontainer">
         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
         <img src="skate_spot.png" alt="Avatar" class="avatar">
@@ -42,19 +42,21 @@
 
       <div class="container">
         <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required> 
+        <input type="text" placeholder="Enter Username" name="uname" id="uname" required> 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
-        <button type="submit">Login</button>
+        <button type="submit" onclick="getuser();">Login</button>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
-      </div>
-
-      <div class="container" style="background-color:#f1f1f1">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <span class="psw"><span class="psw">Forgot <a href="#">password?</a></span>
+      </div>"
+      <div class="loginfo" id="loginfo">
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel </button>
+          <span class="psw"><span class="psw"> Forgot <a href="#">password?</a></span>
+          <span class="psw"><span class="psw">Not a user? <a href="#">Register here</a></span>
+        </div>
       </div>
     </form>
   </div>

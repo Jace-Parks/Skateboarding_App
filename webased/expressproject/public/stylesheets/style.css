@@ -129,9 +129,16 @@ img.avatar {
 }
 
 span.psw {
-  float: right;
+  float: inline-block;
+  width: 123px;
   padding-top: 16px;
 }
+
+/*.loginfo { 
+   min-width:100px; 
+   width: auto !important; 
+   width: 100px; 
+}*/
 
 /* The Modal (background) */
 .modal {

@@ -1,22 +1,27 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
-//const {MongoClient} = require('mongodb');
 const assert = require('assert');
+const https = require('https');
 var path = require('path');
 const app = express();
 const port = 3001;
-let mongoose = require('mongoose');
-// Connection URL
-//const url = 'mongodb://73.37.45.136:27017';
-//const dbName = 'skatemaps';
-// Create a new MongoClient
-//const client = new MongoClient(url);
+const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 const dbname = 'skatemaps';      // REPLACE WITH YOUR DB NAME
 const server = '73.37.45.136:27017';
 const url = "mongodb://mongoadmin0:Prestond234@73.37.45.136:27017/skatemaps";
-//const client = new MongoClient(url);
+const BodyParser = require("body-parser");
+var publicDir = path.join(__dirname,'php');
+const fs = require('fs');
 
+const options = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+};
 
+var httpsServer = https.createServer(options, app);
+
+httpsServer.listen(port);
 
 //functions and actions
 
@@ -25,10 +30,39 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.get('/',function (req, res) {
   res.render('pages/maps');
+})
+
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extend: true }));
+app.post("/register", async (request, response) => {
+  try {
+      request.body.password = Bcrypt.hashSync(request.body.password, 10);
+      var user = new UserModel(request.body);
+      var result = await user.save();
+      response.send(result);
+  } catch (error) {
+      response.status(500).send(error);
+  }
 });
 
+var userSchema = new Schema({
+  username: String,
+  password: String
+});
 
-app.listen(port, () => console.log(`MasterEJS app Started on port ${port}!`));
+// hash the password
+userSchema.methods.generateHash = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is validss
+userSchema.methods.validPassword = function(password) {
+  return bcrypt.compareSync(password, this.password);
+};
+var User = mongoose.model('user', userSchema);
+module.exports = User;
+
+//app.listen(port, () => console.log(`MasterEJS app Started on port ${port}!`));
 
 async function main(){
   /**
@@ -86,5 +120,19 @@ async function createListing(client, newListing){
   }
 
 );*/
+
+// hash the password
+userSchema.methods.generateHash = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is valid
+userSchema.methods.validPassword = function(password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
+var User = mongoose.model('user', userSchema);
+module.exports = User;
+
 
 main().catch(console.error);
